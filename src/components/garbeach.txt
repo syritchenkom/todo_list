@@ -1,0 +1,115 @@
+//App1.js
+import { useState } from 'react';
+import Form from './components/Form';
+import Todo from './components/Todo';
+import './App1.css';
+
+function App1() {
+ const [todos, setTodos] = useState([])
+
+ const addTask = (userInput) => {
+   if (userInput) {
+    const newItem = {
+     id: Math.random().toString(36).substr(2,9),
+     task: userInput,
+     complete: false
+    }
+    setTodos([...todos, newItem])
+   }
+ }
+
+ const removeTask = (id) => {
+   setTodos([...todos.filter((todo) => todo.id !== id) ])
+ }
+
+ const handleToggle = (id) => {
+    setTodos([
+      ...todos.map((todo) =>
+         todo.id === id ? {...todo, complete: !todo.complete} : {...todo}
+      )
+    ])
+ }
+
+  return (
+    <div className="App1">
+     <header>
+        <h1> Todo List: {todos.length}</h1>
+     </header>
+     <Form addTask={addTask} />
+     {todos.map((todo) => {
+       return (
+         <Todo
+           todo={todo}
+           key={todo.id}
+           toggleTask={handleToggle}
+           removeTask={removeTask}
+         />
+       )
+     })
+     }
+    </div>
+  );
+}
+
+      export default App1;
+
+//=========================================================================
+
+
+//Form.js
+import { useState } from 'react'
+
+function Form({addTask}) {
+ 		const [useInput, setUseInput] = useState('')
+ 		const handleChange = (e) => {
+ 				setUseInput(e.currentTarget.value)
+		}
+
+		const handleSubmit = (e) => {
+ 				e.preventDefault()
+		 		addTask(useInput)
+		 		setUseInput('')
+		}
+
+		const handleKeyPess = (e) => {
+ 				if(e.key === 'Enter') {
+ 				 		handleSubmit(e)
+				}
+		}
+
+ 		return(
+ 			<form onSubmit={handleSubmit}>
+			 		<input
+							value={useInput}
+							type='text'
+							onChange={handleChange}
+							onKeyDown={handleKeyPess}
+							placeholder='Your TodoList'
+					/>
+					<button>Save</button>
+			</form>
+		)
+}
+export default Form;
+
+=====================================================================
+//Todo.js
+function Todo({todo, toggleTask, removeTask}) {
+ return(
+	 <div key={todo.id} className='item-todo'>
+			<div className={todo.complete ? 'item-tekst strike' : 'item-text'}
+				onClick={() => toggleTask(todo.id)}
+			>
+			 {todo.task}
+			</div>
+			<div className='item-delete' onClick={() => removeTask(todo.id)}>
+			 		X
+			</div>
+
+	 </div>
+ )
+}
+export default Todo;
+
+============================================================================================================
+
