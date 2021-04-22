@@ -1,6 +1,6 @@
 # Getting Started the Todo List
 
-This project todo_list you can run here => [todo_list](https://syritchenkom.github.io/).
+This project todo_list you can run here => [todo_list](https://syritchenkom.github.io/todo_list/).
 
 ## Available Scripts
 
