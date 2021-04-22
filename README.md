@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started the Todo List
 
-This project was bootstrapped with [Create React App1](https://github.com/facebook/create-react-app).
+This project todo_list you can run here => [todo_list](https://syritchenkom.github.io/todo_list).
 
 ## Available Scripts
 
